@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Miss Mailiana – The Best Tech Tutor</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #2ECC40;
+    --blue: #1565C0;
+    --navy: #1A2340;
+    --white: #FFFFFF;
+    --off: #F4F7FF;
+    --gray: #6B7A99;
+    --light-green: #E8FAE8;
+    --light-blue: #E3EEFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--navy);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 48px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(21,101,192,0.08);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; }
+  .nav-logo svg { width: 36px; height: 36px; }
+  .nav-brand { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; color: var(--navy); }
+  .nav-brand span { color: var(--green); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--gray); font-size: 14px; font-weight: 500; transition: color .2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-cta {
+    background: var(--green);
+    color: var(--navy);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 10px 24px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(46,204,64,0.35); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    padding: 140px 48px 80px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  /* Background blobs */
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    top: -100px; right: -150px;
+    background: radial-gradient(circle, rgba(46,204,64,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    bottom: 0; left: -100px;
+    background: radial-gradient(circle, rgba(21,101,192,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--light-green);
+    border: 1px solid rgba(46,204,64,0.3);
+    color: #1A7A26;
+    font-size: 13px; font-weight: 500;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-badge .dot { width: 7px; height: 7px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.3)} }
+
+  .hero-headline {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(38px, 5vw, 64px);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -1.5px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.7s ease .1s both;
+  }
+  .hero-headline .accent { color: var(--blue); }
+  .hero-headline .accent-green { color: var(--green); }
+
+  .hero-sub {
+    font-size: 17px;
+    color: var(--gray);
+    line-height: 1.7;
+    max-width: 460px;
+    margin-bottom: 40px;
+    animation: fadeUp 0.7s ease .2s both;
+  }
+
+  .hero-btns {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    animation: fadeUp 0.7s ease .3s both;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 15px;
+    padding: 16px 32px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(26,35,64,0.25); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--green);
+    color: var(--navy);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 15px;
+    padding: 16px 32px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .btn-secondary:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(46,204,64,0.4); }
+
+  .hero-stats {
+    display: flex; gap: 32px; margin-top: 52px;
+    animation: fadeUp 0.7s ease .4s both;
+  }
+  .stat { border-left: 3px solid var(--green); padding-left: 16px; }
+  .stat-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 28px; color: var(--navy); }
+  .stat-label { font-size: 13px; color: var(--gray); }
+
+  /* Hero Visual */
+  .hero-visual {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    animation: fadeUp 0.8s ease .2s both;
+  }
+
+  .hero-card-main {
+    background: var(--navy);
+    border-radius: 24px;
+    padding: 40px;
+    width: 360px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 40px 80px rgba(26,35,64,0.25);
+  }
+  .hero-card-main .card-tag {
+    background: rgba(46,204,64,0.15);
+    color: var(--green);
+    font-size: 12px; font-weight: 600;
+    padding: 5px 12px; border-radius: 100px;
+    display: inline-block; margin-bottom: 20px;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .hero-card-main h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px; font-weight: 700;
+    color: var(--white);
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+  .tool-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .tool-item {
+    display: flex; align-items: center; gap: 12px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 12px; padding: 12px 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .tool-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .tool-name { color: var(--white); font-size: 14px; font-weight: 500; }
+  .tool-level { margin-left: auto; font-size: 11px; color: rgba(255,255,255,0.4); }
+
+  .floating-badge {
+    position: absolute;
+    background: var(--white);
+    border-radius: 16px;
+    padding: 12px 20px;
+    box-shadow: 0 16px 40px rgba(26,35,64,0.15);
+    font-size: 13px; font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+    animation: float 4s ease-in-out infinite;
+  }
+  .fb-1 { top: 10px; right: -20px; z-index: 3; animation-delay: 0s; }
+  .fb-2 { bottom: 30px; left: -30px; z-index: 3; animation-delay: 2s; }
+  .fb-emoji { font-size: 18px; }
+
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+  /* VIDEO SECTION */
+  .video-section {
+    background: var(--off);
+    padding: 100px 48px;
+    text-align: center;
+  }
+  .section-eyebrow {
+    font-size: 13px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 16px;
+    display: block;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 800; letter-spacing: -1px;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .section-sub {
+    color: var(--gray); font-size: 16px; line-height: 1.7;
+    max-width: 540px; margin: 0 auto 48px;
+  }
+
+  .video-wrapper {
+    max-width: 720px;
+    margin: 0 auto 40px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(26,35,64,0.18);
+    position: relative;
+    cursor: pointer;
+  }
+  .video-placeholder {
+    background: var(--navy);
+    aspect-ratio: 16/9;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .video-placeholder::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(46,204,64,0.15) 0%, transparent 60%),
+                radial-gradient(circle at 80% 30%, rgba(21,101,192,0.2) 0%, transparent 50%);
+  }
+  .play-btn {
+    width: 80px; height: 80px;
+    background: var(--green);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform .2s, box-shadow .2s;
+    position: relative; z-index: 1;
+  }
+  .play-btn:hover { transform: scale(1.1); box-shadow: 0 0 0 16px rgba(46,204,64,0.15); }
+  .play-btn svg { width: 28px; height: 28px; fill: var(--navy); margin-left: 4px; }
+  .video-label {
+    color: rgba(255,255,255,0.6);
+    font-size: 14px;
+    position: relative; z-index: 1;
+  }
+  .video-tip {
+    display: inline-block;
+    background: var(--navy);
+    color: var(--white);
+    font-size: 13px; padding: 10px 24px;
+    border-radius: 100px;
+    margin-bottom: 36px;
+  }
+  .video-tip strong { color: var(--green); }
+
+  /* PROBLEM */
+  .problem-section { padding: 100px 48px; }
+  .problem-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 64px; align-items: center;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .problem-cards { display: flex; flex-direction: column; gap: 16px; }
+  .problem-card {
+    background: var(--off);
+    border-radius: 16px; padding: 24px 28px;
+    border-left: 4px solid transparent;
+    display: flex; gap: 16px; align-items: flex-start;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .problem-card:hover { border-color: var(--blue); box-shadow: 0 8px 24px rgba(21,101,192,0.1); }
+  .problem-card .icon { font-size: 24px; flex-shrink: 0; }
+  .problem-card h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; margin-bottom: 6px; }
+  .problem-card p { color: var(--gray); font-size: 14px; line-height: 1.6; }
+  .problem-close {
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 20px; padding: 32px;
+    font-size: 18px; font-weight: 600; font-family: 'Syne', sans-serif;
+    line-height: 1.6;
+  }
+  .problem-close em { color: var(--green); font-style: normal; }
+
+  /* METHOD */
+  .method-section {
+    background: var(--navy);
+    padding: 100px 48px;
+    color: var(--white);
+    text-align: center;
+  }
+  .method-section .section-title { color: var(--white); }
+  .method-section .section-sub { color: rgba(255,255,255,0.55); }
+  .steps-row {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; max-width: 900px; margin: 0 auto;
+    position: relative;
+  }
+  .steps-row::before {
+    content: '';
+    position: absolute;
+    top: 48px; left: calc(16.66% + 24px); right: calc(16.66% + 24px);
+    height: 2px;
+    background: linear-gradient(90deg, var(--green), var(--blue));
+    z-index: 0;
+  }
+  .step-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px; padding: 36px 28px;
+    text-align: center; position: relative;
+    transition: background .2s, transform .2s;
+  }
+  .step-card:hover { background: rgba(255,255,255,0.09); transform: translateY(-6px); }
+  .step-num {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 24px;
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 22px;
+    position: relative; z-index: 1;
+  }
+  .s1 .step-num { background: var(--green); color: var(--navy); }
+  .s2 .step-num { background: var(--blue); color: var(--white); }
+  .s3 .step-num { background: linear-gradient(135deg, var(--green), var(--blue)); color: var(--white); }
+  .step-card h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 20px; margin-bottom: 12px; }
+  .step-card p { color: rgba(255,255,255,0.55); font-size: 14px; line-height: 1.7; }
+
+  /* OFFERS */
+  .offers-section { padding: 100px 48px; }
+  .offers-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px; max-width: 1100px; margin: 0 auto;
+  }
+  .offer-card {
+    border-radius: 20px; padding: 32px 24px;
+    border: 1.5px solid rgba(26,35,64,0.1);
+    display: flex; flex-direction: column;
+    transition: transform .2s, box-shadow .2s, border-color .2s;
+    position: relative; overflow: hidden;
+  }
+  .offer-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(26,35,64,0.12); border-color: var(--green); }
+  .offer-card.featured {
+    background: var(--navy); color: var(--white);
+    border-color: var(--navy);
+  }
+  .offer-card.featured:hover { box-shadow: 0 24px 48px rgba(26,35,64,0.35); }
+  .offer-tier {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gray);
+    margin-bottom: 12px;
+  }
+  .offer-card.featured .offer-tier { color: var(--green); }
+  .offer-card h3 {
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 20px;
+    margin-bottom: 8px; line-height: 1.2;
+  }
+  .offer-price {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: 28px; color: var(--navy);
+    margin-bottom: 20px;
+  }
+  .offer-card.featured .offer-price { color: var(--green); }
+  .offer-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; flex: 1; }
+  .offer-features li {
+    font-size: 14px; color: var(--gray);
+    display: flex; gap: 10px; align-items: flex-start; line-height: 1.5;
+  }
+  .offer-card.featured .offer-features li { color: rgba(255,255,255,0.65); }
+  .offer-features li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+  .offer-btn {
+    display: block; text-align: center;
+    padding: 13px 20px;
+    border-radius: 100px;
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px;
+    text-decoration: none;
+    transition: all .2s;
+  }
+  .btn-outline { border: 2px solid var(--navy); color: var(--navy); }
+  .btn-outline:hover { background: var(--navy); color: var(--white); }
+  .btn-green { background: var(--green); color: var(--navy); border: 2px solid var(--green); }
+  .btn-green:hover { box-shadow: 0 8px 24px rgba(46,204,64,0.4); }
+  .btn-white { background: var(--white); color: var(--navy); border: 2px solid var(--white); }
+  .btn-white:hover { background: var(--green); border-color: var(--green); }
+  .featured-ribbon {
+    position: absolute; top: 16px; right: -30px;
+    background: var(--green); color: var(--navy);
+    font-size: 10px; font-weight: 700;
+    padding: 4px 40px;
+    transform: rotate(45deg);
+    letter-spacing: 1px;
+  }
+
+  /* SOCIAL PROOF */
+  .proof-section { background: var(--off); padding: 100px 48px; }
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 20px; max-width: 1100px; margin: 0 auto;
+  }
+  .testimonial {
+    background: var(--white);
+    border-radius: 20px; padding: 32px;
+    border: 1px solid rgba(26,35,64,0.06);
+    transition: box-shadow .2s;
+  }
+  .testimonial:hover { box-shadow: 0 16px 40px rgba(26,35,64,0.1); }
+  .t-stars { color: var(--green); font-size: 16px; margin-bottom: 16px; }
+  .t-quote { font-size: 15px; line-height: 1.7; color: var(--navy); margin-bottom: 20px; font-style: italic; }
+  .t-author { display: flex; align-items: center; gap: 12px; }
+  .t-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 16px; color: var(--white);
+  }
+  .av1 { background: linear-gradient(135deg, var(--green), #1A7A26); }
+  .av2 { background: linear-gradient(135deg, var(--blue), #0D3D7A); }
+  .av3 { background: linear-gradient(135deg, #FF6B35, #C44B28); }
+  .t-name { font-weight: 600; font-size: 14px; }
+  .t-role { font-size: 12px; color: var(--gray); }
+
+  /* FAQ */
+  .faq-section { padding: 100px 48px; max-width: 760px; margin: 0 auto; }
+  .faq-item {
+    border-bottom: 1px solid rgba(26,35,64,0.1);
+    padding: 24px 0;
+  }
+  .faq-q {
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 17px;
+    cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 16px;
+  }
+  .faq-q::after { content: '+'; font-size: 24px; color: var(--green); flex-shrink: 0; transition: transform .2s; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a {
+    color: var(--gray); font-size: 15px; line-height: 1.7;
+    max-height: 0; overflow: hidden;
+    transition: max-height .3s ease, padding .3s;
+  }
+  .faq-item.open .faq-a { max-height: 200px; padding-top: 16px; }
+
+  /* FINAL CTA */
+  .cta-section {
+    padding: 100px 48px;
+    background: var(--navy);
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(46,204,64,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(21,101,192,0.2) 0%, transparent 50%);
+  }
+  .cta-section .section-title { color: var(--white); position: relative; z-index: 1; }
+  .cta-section .section-sub { color: rgba(255,255,255,0.55); position: relative; z-index: 1; }
+  .cta-btns {
+    display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+    position: relative; z-index: 1;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #0D1525;
+    padding: 40px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    color: rgba(255,255,255,0.35); font-size: 13px;
+  }
+  .footer-brand { font-family: 'Syne', sans-serif; font-weight: 800; color: var(--white); font-size: 16px; }
+  .footer-brand span { color: var(--green); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 120px 24px 60px; gap: 48px; }
+    .hero-visual { order: -1; }
+    .hero-card-main { width: 100%; max-width: 340px; }
+    .problem-grid { grid-template-columns: 1fr; }
+    .steps-row { grid-template-columns: 1fr; }
+    .steps-row::before { display: none; }
+    .offers-grid { grid-template-columns: 1fr 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .problem-section, .method-section, .offers-section,
+    .proof-section, .faq-section, .cta-section, .video-section { padding: 72px 24px; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+  }
+  @media (max-width: 520px) {
+    .offers-grid { grid-template-columns: 1fr; }
+    .hero-stats { flex-wrap: wrap; gap: 20px; }
+    .cta-btns { flex-direction: column; align-items: stretch; }
+    .btn-primary, .btn-secondary { text-align: center; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 10L18 22L32 10" stroke="#2ECC40" stroke-width="4" stroke-linecap="round"/>
+      <path d="M4 19L18 31L32 19" stroke="#1565C0" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="18" cy="6" r="4" fill="#1A2340"/>
+    </svg>
+    <span class="nav-brand">Miss <span>Mailiana</span></span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#problem">Why This Works</a></li>
+    <li><a href="#method">The Method</a></li>
+    <li><a href="#offers">Programs</a></li>
+    <li><a href="#proof">Results</a></li>
+  </ul>
+  <a href="#offers" class="nav-cta">Start Free →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Ghana's #1 Data Analytics Tutor
+    </div>
+    <h1 class="hero-headline">
+      From Zero Knowledge<br>
+      to <span class="accent">Data</span><br>
+      <span class="accent-green">Confidence</span>
+    </h1>
+    <p class="hero-sub">
+      Learn Excel, Power BI, SQL & Python step-by-step. Real projects, real skills, and a clear path — even if you're starting from absolute scratch.
+    </p>
+    <div class="hero-btns">
+      <a href="#offers" class="btn-primary">Start for Free ↓</a>
+      <a href="#offers" class="btn-secondary">View All Programs</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Students Trained</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Core Tools Covered</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Beginner Friendly</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-card-main">
+      <span class="card-tag">Your Learning Path</span>
+      <h3>Master Data Analytics — Step by Step</h3>
+      <ul class="tool-list">
+        <li class="tool-item">
+          <div class="tool-icon" style="background:#E8F5E9;">📊</div>
+          <span class="tool-name">Microsoft Excel</span>
+          <span class="tool-level">Start Here</span>
+        </li>
+        <li class="tool-item">
+          <div class="tool-icon" style="background:#E3F2FD;">📈</div>
+          <span class="tool-name">Power BI</span>
+          <span class="tool-level">Visualize</span>
+        </li>
+        <li class="tool-item">
+          <div class="tool-icon" style="background:#FFF3E0;">🗄️</div>
+          <span class="tool-name">SQL</span>
+          <span class="tool-level">Query</span>
+        </li>
+        <li class="tool-item">
+          <div class="tool-icon" style="background:#F3E5F5;">🐍</div>
+          <span class="tool-name">Python</span>
+          <span class="tool-level">Advanced</span>
+        </li>
+      </ul>
+    </div>
+    <div class="floating-badge fb-1">
+      <span class="fb-emoji">🎯</span>
+      <span>Real Projects Included</span>
+    </div>
+    <div class="floating-badge fb-2">
+      <span class="fb-emoji">🏆</span>
+      <span>Portfolio-Ready Skills</span>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="video-section" id="video">
+  <span class="section-eyebrow">Watch First</span>
+  <h2 class="section-title">Watch This Before You<br>Start Your Data Journey</h2>
+  <p class="section-sub">In just a few minutes, learn exactly how to go from confused beginner to confident data analyst — with the right structure.</p>
+  <div class="video-wrapper">
+    <div class="video-wrapper" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:24px;">
+      <iframe src="https://www.youtube.com/embed/kOsb5_YRkAI?rel=0&modestbranding=1&autoplay=1&mute=1&playsinline=1"
+        title="Miss Mailiana Intro Video" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+  <div class="video-tip"><strong>Watch this before choosing where to start</strong> — it will save you weeks of confusion</div>
+  <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+    <a href="#offers" class="btn-primary">Start for Free →</a>
+    <a href="#offers" class="btn-secondary">Get Full Access</a>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem-section" id="problem">
+  <div class="problem-grid">
+    <div>
+      <span class="section-eyebrow">The Problem</span>
+      <h2 class="section-title" style="text-align:left;">Why Learning Data<br>Feels So Confusing</h2>
+      <p class="section-sub" style="text-align:left;margin:0 0 32px;">You've tried before. Here's what's actually been holding you back.</p>
+      <div class="problem-cards">
+        <div class="problem-card">
+          <span class="icon">🎲</span>
+          <div>
+            <h4>No Clear Direction</h4>
+            <p>Jumping between YouTube tutorials with no structured path, never knowing what to learn next.</p>
+          </div>
+        </div>
+        <div class="problem-card">
+          <span class="icon">🧱</span>
+          <div>
+            <h4>Tools Without Context</h4>
+            <p>Learning features in isolation with no real project to apply them to — knowledge that doesn't stick.</p>
+          </div>
+        </div>
+        <div class="problem-card">
+          <span class="icon">😰</span>
+          <div>
+            <h4>Feeling Left Behind</h4>
+            <p>Everyone else seems to get it faster. The overwhelm makes you want to quit before you've really started.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="problem-close">
+      It's not your fault.<br><br>
+      You've just never had a <em>structured path</em>.<br><br>
+      That's exactly what Miss Mailiana provides — a <em>clear, step-by-step system</em> that takes you from confused to confident.
+    </div>
+  </div>
+</section>
+
+<!-- METHOD -->
+<section class="method-section" id="method">
+  <span class="section-eyebrow" style="color:var(--green);">The System</span>
+  <h2 class="section-title">A Clear Roadmap From<br>Beginner to Confident Analyst</h2>
+  <p class="section-sub">Three steps. Zero overwhelm. Real results.</p>
+  <div class="steps-row">
+    <div class="step-card s1">
+      <div class="step-num">1</div>
+      <h3>Clarity</h3>
+      <p>Understand the data landscape from scratch. Know exactly what to learn, why it matters, and in what order.</p>
+    </div>
+    <div class="step-card s2">
+      <div class="step-num">2</div>
+      <h3>Skills</h3>
+      <p>Build hands-on expertise in Excel, Power BI, SQL and Python through structured lessons and real-world projects.</p>
+    </div>
+    <div class="step-card s3">
+      <div class="step-num">3</div>
+      <h3>Confidence</h3>
+      <p>Walk away with portfolio-ready work that proves your ability to any employer or client.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OFFERS -->
+<section class="offers-section" id="offers">
+  <span class="section-eyebrow" style="display:block;text-align:center;">Programs</span>
+  <h2 class="section-title" style="text-align:center;">Choose Your Starting Point</h2>
+  <p class="section-sub" style="text-align:center;margin:0 auto 52px;">Every level, every budget. Start free and grow at your own pace.</p>
+  <div class="offers-grid">
+    <!-- Free -->
+    <div class="offer-card">
+      <div class="offer-tier">Free Starter</div>
+      <h3>Chapter 1 — Zero Knowledge</h3>
+      <div class="offer-price">Free</div>
+      <ul class="offer-features">
+        <li>Beginner-friendly introduction</li>
+        <li>Clear learning roadmap</li>
+        <li>No overwhelm, no jargon</li>
+        <li>Instant digital download</li>
+      </ul>
+      <a href="#" class="offer-btn btn-outline">Download Free →</a>
+    </div>
+    <!-- Ebook -->
+    <div class="offer-card">
+      <div class="offer-tier">Self-Paced</div>
+      <h3>Full Ebook Guide</h3>
+      <div class="offer-price">GH₵ 120</div>
+      <ul class="offer-features">
+        <li>Complete learning roadmap</li>
+        <li>All 4 tools explained</li>
+        <li>Structured chapter-by-chapter</li>
+        <li>Lifetime access</li>
+      </ul>
+      <a href="#" class="offer-btn btn-outline">Get Full Guide →</a>
+    </div>
+    <!-- Courses - FEATURED -->
+    <div class="offer-card featured">
+      <div class="featured-ribbon">POPULAR</div>
+      <div class="offer-tier">Most Popular</div>
+      <h3>Data Skills Accelerator</h3>
+      <div class="offer-price">Ask for Price</div>
+      <ul class="offer-features">
+        <li>Excel, Power BI, SQL & Python</li>
+        <li>Recorded video lessons</li>
+        <li>Real-world projects</li>
+        <li>Lifetime course access</li>
+      </ul>
+      <a href="#" class="offer-btn btn-white">Get Course Bundle →</a>
+    </div>
+    <!-- Live -->
+    <div class="offer-card">
+      <div class="offer-tier">Live Training</div>
+      <h3>Data Foundation Class</h3>
+      <div class="offer-price">Ask for Price</div>
+      <ul class="offer-features">
+        <li>Live mentorship sessions</li>
+        <li>Hands-on guided projects</li>
+        <li>Portfolio building support</li>
+        <li>Community access</li>
+      </ul>
+      <a href="#" class="offer-btn btn-green">Join Next Cohort →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="proof-section" id="proof">
+  <span class="section-eyebrow" style="display:block;text-align:center;">Real Results</span>
+  <h2 class="section-title" style="text-align:center;margin-bottom:12px;">What Students Are Saying</h2>
+  <p class="section-sub" style="text-align:center;margin:0 auto 52px;">From total beginners to job-ready analysts — here's what happens when you follow the path.</p>
+  <div class="testimonials-grid">
+    <div class="testimonial">
+      <div class="t-stars">★★★★★</div>
+      <p class="t-quote">"I had zero knowledge of Excel before Miss Mailiana's class. Three months later I'm building dashboards for my company. The structured approach made all the difference."</p>
+      <div class="t-author">
+        <div class="t-avatar av1">A</div>
+        <div>
+          <div class="t-name">Abena K.</div>
+          <div class="t-role">Data Analyst, Accra</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <div class="t-stars">★★★★★</div>
+      <p class="t-quote">"I tried learning from YouTube for months and got nowhere. One cohort with Miss Mailiana and I finally understood how everything connects. Worth every pesewa."</p>
+      <div class="t-author">
+        <div class="t-avatar av2">K</div>
+        <div>
+          <div class="t-name">Kwame A.</div>
+          <div class="t-role">Finance Graduate, Kumasi</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <div class="t-stars">★★★★★</div>
+      <p class="t-quote">"The free chapter alone was more valuable than hours of random videos. The roadmap is so clear. I knew exactly what to learn and in what order for the first time."</p>
+      <div class="t-author">
+        <div class="t-avatar av3">E</div>
+        <div>
+          <div class="t-name">Efua M.</div>
+          <div class="t-role">Business Student, Legon</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <span class="section-eyebrow" style="display:block;text-align:center;">Questions</span>
+  <h2 class="section-title" style="text-align:center;margin-bottom:48px;">Frequently Asked</h2>
+  <div class="faq-item">
+    <div class="faq-q">Is this really for complete beginners?</div>
+    <div class="faq-a">Absolutely. Every program is designed with zero assumptions. If you've never opened Excel before, you're in the right place. We start from the very beginning.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Do I need any prior experience or a special computer?</div>
+    <div class="faq-a">No prior experience needed. A basic laptop or desktop with internet access is all you need. We guide you through any software setup step by step.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Will I actually build real projects?</div>
+    <div class="faq-a">Yes — especially in the courses and live training. You'll work on hands-on projects that go straight into your portfolio, showing employers exactly what you can do.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">How long does it take to complete a program?</div>
+    <div class="faq-a">It depends on your pace and chosen program. The ebook can be read in a few hours; the courses are self-paced over several weeks; the live cohort runs on a structured schedule. You choose what fits your life.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Where do I start if I'm not sure?</div>
+    <div class="faq-a">Start with the free Chapter 1. It gives you a clear roadmap and helps you decide which next step is right for you — no risk, no commitment required.</div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-section">
+  <h2 class="section-title">Start Your Data Journey Today</h2>
+  <p class="section-sub" style="margin-bottom:40px;">The best time to start was yesterday. The second best time is right now.</p>
+  <div class="cta-btns">
+    <a href="#offers" class="btn-secondary">Start for Free →</a>
+    <a href="#offers" class="btn-primary" style="background:rgba(255,255,255,0.1);border:2px solid rgba(255,255,255,0.2);color:#fff;">View All Programs</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Miss <span>Mailiana</span> · The Best Tech Tutor</div>
+  <div>© 2025 Miss Mailiana. All rights reserved. · Ghana 🇬🇭</div>
+</footer>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.offer-card, .step-card, .testimonial, .problem-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
